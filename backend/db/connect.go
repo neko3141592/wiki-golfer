@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gin-quickstart/models"
 	"os"
+
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,9 +13,8 @@ import (
 var DB *gorm.DB
 
 func ConnectDB() error {
-	if err := godotenv.Load(); err != nil {
-		return fmt.Errorf("failed to load .env file: %w", err)
-	}
+	// .envファイルがあれば読み込む（Docker環境では環境変数が既に設定されているため無視）
+	_ = godotenv.Load()
 	dsn := os.Getenv("DSN")
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

@@ -22,8 +22,6 @@ func restorePath(prev map[int]int, start, goal int) []int {
 	return path
 }
 
-
-// 終了条件を関数で指定
 func BFS(graph map[int][]int, start int, isGoal func(id int) bool) ([]int, error) {
 	var q queue.Queue
 	q.Put(start)
